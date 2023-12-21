@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Toggle A */
+input[type="checkbox"]:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #77D19C;
+  }
+
+  ::backdrop{
+    background-color: dimgray;
+  }
+
+  
+ 

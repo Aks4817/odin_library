@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/styles.css">
+    <script src="./index.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body class="mx-40">
+    <dialog class="w-3/4 h-5/6 bg-gradient-to-b from-[#467186] to-[#77D19C] px-12">
+        <div class="text-white text-2xl text-center">Book Submission</div>
+
+        <div class="flex">
+            <form class="flex flex-col w-1/2">
+                <label for="bookName" class="mt-5 text-white">What is the name of the book?</label>
+                <input type="text" id="bookName" name="bookName"  required>
+                <label for="author" class="mt-5 text-white">Who is the author of the book?</label>
+                <input type="text" id="author" name="author"  required>
+                <label for="pages" class="mt-5 text-white">How many pages does the book have?</label>
+                <input type="number" id="pages" name="pages"  required>
+                <label for="publishDate" class="mt-5 text-white">When was the book published?</label>
+                <input type="date" id="publishDate" name="publishDate" required>
+                <label for="language" class="mt-5 text-white">In what language is the book written?</label>
+                <input type="text" id="language" name="language"  required>
+                <label for="hasRead" class="mt-5 text-white flex "><span class=" pt-0 pr-6">Have you read this book?</span>
+                    <!-- toggle -->
+                    <div class="relative">
+                        <!-- input -->
+                        <input id="hasRead" type="checkbox" class="sr-only" name="hasRead"/>
+                        <!-- line -->
+                        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                        <!-- dot -->
+                        <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                    </div>
+                    <!-- label -->
+                </label>
+                <div class="flex place-content-evenly py-4">
+                    <button id="done" type="submit" class="mx-1 border-solid border-[3px] border-[#3f704d] rounded-md h-7 w-16">Submit</button>
+                    <button class=" mx-1 border-solid border-[3px] border-[#3f704d] rounded-md h-7 w-16" formnovalidate>Close</button>
+                </div>
+            </form>
+            <img src="./books.jpeg" class="w-1/2 ml-5 mt-5 h-[500px]">
+        </div>
+    </dialog>
+    <div class="w-auto h-52 flex">
+        <div class="w-4/5">
+            <div class="flex pt-16">
+                <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-24 w-auto rounded-full">
+                        <title>bookshelf</title>
+                        <path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" />
+                    </svg>
+                </div>
+                <div class="h-24 w-auto text-5xl flex">
+                    <span class="pt-5">My library</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-1/5 flex flex-col">
+            <div class="h-4/5 border-[#3f704d] border-solid border-2 m-4 mb-0 px-4 w-60">
+                <div class="text-xl text-center text-[#3f704d] py-2">Library Log</div>
+                <div class="text-lg text-left text-[#3f704d]">total book count : <span id="bookcount">0</span></div>
+                <div class="text-lg text-left text-[#3f704d]">Read : <span id="readnum">0</span></div>
+                <div class="text-lg text-left text-[#3f704d]">UnRead: <span id="unreadnum">0</span></div>
+            </div>
+            <div class="h-7 flex justify-end pr-2 my-1">
+                <div class="h-7 text-xl">Dark Mode :</div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-7 my-auto pl-1">
+                    <title>brightness-6</title>
+                    <path
+                        d="M12,18V6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="bg-[#e3e3e3] my-5 h-10 w-auto flex py-1 place-content-between">
+        <div id="order" class="ml-3 flex">
+            <div class="px-1">Order By</div>
+            <select id="order_by" type="order_by"
+                class="mx-1 border-solid border-[1px] border-[#3f704d] rounded-md h-7">
+                <option value="Insertion Date">Insertion Date</option>
+                <option value="Publishing Date">Publishing Date</option>
+            </select>
+            <select id="order" type="order" class="mx-1 border-solid border-[1px] border-[#3f704d] rounded-md h-7">
+                <option value="Asc">Asc</option>
+                <option value="Desc">Desc</option>
+            </select>
+        </div>
+        <div class="flex justify-self-end">
+            <div class="bg-gradient-to-br from-[#467186] to-[#77D19C] w-10 h-7 mx-1"></div>
+            <div class="mr-4">Read</div>
+            <div class="bg-gradient-to-br to-[#464646] from-[#e7e7e7] w-10 h-7 mx-1"></div>
+            <div class="mr-3">Unread</div>
+        </div>
+    </div>
+    <div class="grid grid-cols-3 gap-4 p-5" id="bookshelf">
+        <div class="bg-gradient-to-br from-[#467186] to-[#77D19C] h-60 text-white pl-6 pt-5 rounded-xl" id="A_Game_Of_Thrones">
+            <span class="ml-64">×</span>
+            <div id="title" class="text-xl font-semibold">A Game Of Thrones</div>
+            <div class="py-0.5">By:<span id="author"> George R. R. Martin</span></div>
+            <div class="py-0.5">Number of Pages: <span id="pages">694</span> </div>
+            <div class="py-0.5">Language : <span id="lan">English</span></div>
+            <div class="py-0.5">Published: <span id="dop">July 1 1996</span></div>
+            <div class="pt-3 flex">
+                <label for="toogleA" class="flex items-center cursor-pointer ml-60">
+                    <!-- toggle -->
+                    <div class="relative">
+                        <!-- input -->
+                        <input id="toogleA" type="checkbox" class="sr-only" />
+                        <!-- line -->
+                        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                        <!-- dot -->
+                        <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                    </div>
+                    <!-- label -->
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <button id="addbook" class="fixed bottom-5 right-5 bg-blue-600 text-4xl rounded-full w-12 h-12 text-white">+</button>
+</body>
+
+</html>
